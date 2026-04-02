@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agents vs. Skills — Key Distinctions | Glean</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: linear-gradient(135deg, #f0ede6 0%, #e8e4dc 50%, #f0ede6 100%);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    padding: 48px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  .page {
+    max-width: 1120px;
+    width: 100%;
+  }
+
+  .card {
+    background: #faf8f3;
+    border-radius: 28px;
+    padding: 48px 52px 44px;
+    width: 100%;
+    box-shadow:
+      0 1px 2px rgba(0,0,0,0.04),
+      0 4px 16px rgba(0,0,0,0.06),
+      0 12px 48px rgba(0,0,0,0.08);
+    border: 1.5px solid #e2dbd0;
+    margin-bottom: 28px;
+  }
+
+  /* ── Header ── */
+  .header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 16px;
+    margin-bottom: 40px;
+    padding-bottom: 32px;
+    border-bottom: 2px solid #e2dbd0;
+  }
+  .logo-box {
+    height: 44px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .logo-box img {
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+  }
+  .header h1 {
+    font-size: 36px; font-weight: 900; color: #111827; letter-spacing: -1px;
+    line-height: 1.15;
+  }
+  .header h1 .vs {
+    color: #343CED;
+  }
+  .subtitle {
+    font-size: 15.5px; color: #4b5563;
+    font-weight: 500;
+    line-height: 1.7;
+    max-width: 780px;
+  }
+
+  /* ── Core Premise ── */
+  .premise-box {
+    background: linear-gradient(135deg, #f0f0ff 0%, #fff 100%);
+    border: 2px solid #343CED;
+    border-radius: 16px;
+    padding: 28px 32px;
+    margin-bottom: 8px;
+  }
+  .premise-box .premise-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 700; color: #343CED;
+    text-transform: uppercase; letter-spacing: 1.5px;
+    margin-bottom: 12px;
+  }
+  .premise-box p {
+    font-size: 14.5px; color: #374151; line-height: 1.75; font-weight: 500;
+  }
+  .premise-box p strong { color: #111827; font-weight: 700; }
+  .premise-box .key-insight {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1.5px solid rgba(52, 60, 237, 0.15);
+    font-size: 13.5px;
+    color: #343CED;
+    font-weight: 700;
+    line-height: 1.6;
+  }
+
+  /* ── Section headers ── */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid #e2dbd0;
+  }
+  .section-icon {
+    width: 48px; height: 48px;
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+  .section-header h2 {
+    font-size: 22px; font-weight: 800; color: #111827;
+    letter-spacing: -0.5px; line-height: 1.3;
+  }
+  .section-header .section-sub {
+    font-size: 13px; font-weight: 500; color: #6b7280; line-height: 1.5;
+    margin-top: 2px;
+  }
+
+  /* Section color themes */
+  .s-durable .section-icon { background: #ede9fe; }
+  .s-nearterm .section-icon { background: #fef9c3; }
+  .s-converge .section-icon { background: #ffedd5; }
+  .s-framework .section-icon { background: #dbeafe; }
+  .s-examples .section-icon { background: #dcfce7; }
+
+  /* ── Distinction cards ── */
+  .distinction {
+    background: #fff;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 16px;
+    padding: 28px 30px;
+    margin-bottom: 20px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .distinction:hover {
+    border-color: #c7d2fe;
+    box-shadow: 0 2px 12px rgba(52, 60, 237, 0.06);
+  }
+  .distinction-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; font-weight: 700;
+    color: #fff;
+    background: #343CED;
+    width: 28px; height: 28px;
+    border-radius: 8px;
+    display: inline-flex; align-items: center; justify-content: center;
+    margin-right: 10px;
+    flex-shrink: 0;
+  }
+  .distinction-title {
+    font-size: 17px; font-weight: 800; color: #111827;
+    display: flex; align-items: center;
+    margin-bottom: 18px;
+    letter-spacing: -0.3px;
+  }
+  .distinction-title .durability-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; font-weight: 700;
+    padding: 3px 10px; border-radius: 20px;
+    margin-left: 12px;
+    white-space: nowrap;
+  }
+  .tag-durable { background: #ede9fe; color: #5b21b6; border: 1.5px solid #c4b5fd; }
+  .tag-nearterm { background: #fef9c3; color: #a16207; border: 1.5px solid #fde047; }
+  .tag-needed { background: #ffedd5; color: #c2410c; border: 1.5px solid #fdba74; }
+
+  /* Sub-sections within distinction */
+  .dist-section {
+    margin-bottom: 16px;
+  }
+  .dist-section:last-child { margin-bottom: 0; }
+  .dist-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .label-enables { color: #15803d; }
+  .label-matters { color: #343CED; }
+  .label-example { color: #c2410c; }
+  .label-erode { color: #9ca3af; }
+  .label-durable { color: #5b21b6; }
+  .label-build { color: #0f766e; }
+
+  .dist-section ul {
+    list-style: none;
+    padding: 0;
+  }
+  .dist-section ul li {
+    font-size: 13.5px; color: #374151; line-height: 1.65;
+    padding: 3px 0 3px 20px;
+    position: relative;
+    font-weight: 500;
+  }
+  .dist-section ul li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 11px;
+    width: 8px; height: 8px;
+    border-radius: 2px;
+    background: #e5e7eb;
+  }
+  .dist-section p {
+    font-size: 13.5px; color: #4b5563; line-height: 1.7; font-weight: 500;
+  }
+  .dist-section p strong { color: #111827; }
+
+  /* Example box */
+  .example-box {
+    background: #f9fafb;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 16px 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12.5px;
+    line-height: 1.8;
+    color: #374151;
+  }
+  .example-box .ex-check { color: #15803d; font-weight: 700; }
+  .example-box .ex-cross { color: #dc2626; font-weight: 700; }
+  .example-box .ex-arrow { color: #343CED; font-weight: 600; }
+  .example-box .ex-dim { color: #9ca3af; }
+
+  /* Durability note */
+  .durability-note {
+    background: #faf5ff;
+    border-left: 3px solid #c4b5fd;
+    border-radius: 0 8px 8px 0;
+    padding: 12px 16px;
+    font-size: 12.5px; color: #6d28d9;
+    line-height: 1.65;
+    font-weight: 500;
+    margin-top: 12px;
+  }
+  .erode-note {
+    background: #fefce8;
+    border-left: 3px solid #fde047;
+    border-radius: 0 8px 8px 0;
+    padding: 12px 16px;
+    font-size: 12.5px; color: #854d0e;
+    line-height: 1.65;
+    font-weight: 500;
+    margin-top: 12px;
+  }
+  .build-note {
+    background: #f0fdfa;
+    border-left: 3px solid #5eead4;
+    border-radius: 0 8px 8px 0;
+    padding: 12px 16px;
+    font-size: 12.5px; color: #0f766e;
+    line-height: 1.65;
+    font-weight: 500;
+    margin-top: 12px;
+  }
+
+  /* ── Comparison visual (Agent vs Skill) ── */
+  .compare-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 12px 0;
+  }
+  .compare-cell {
+    border-radius: 10px;
+    padding: 14px 18px;
+    font-size: 13px;
+    line-height: 1.65;
+    font-weight: 500;
+  }
+  .cell-agent {
+    background: #fff7ed;
+    border: 1.5px solid #fdba74;
+    color: #9a3412;
+  }
+  .cell-skill {
+    background: #f0fdf4;
+    border: 1.5px solid #86efac;
+    color: #166534;
+  }
+  .compare-cell .cell-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1px;
+    margin-bottom: 6px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .cell-agent .cell-label { color: #c2410c; }
+  .cell-skill .cell-label { color: #15803d; }
+
+  /* ── Decision Framework Table ── */
+  .framework-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 13px;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1.5px solid #e5e7eb;
+  }
+  .framework-table thead th {
+    background: #1e1b4b;
+    color: #fff;
+    font-weight: 700;
+    padding: 14px 18px;
+    text-align: left;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .framework-table tbody tr {
+    transition: background 0.15s ease;
+  }
+  .framework-table tbody tr:hover {
+    background: rgba(52, 60, 237, 0.03);
+  }
+  .framework-table tbody td {
+    padding: 14px 18px;
+    border-bottom: 1px solid #f3f4f6;
+    color: #374151;
+    font-weight: 500;
+    line-height: 1.6;
+    vertical-align: top;
+  }
+  .framework-table tbody tr:last-child td {
+    border-bottom: none;
+  }
+  .type-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px; font-weight: 700;
+    padding: 4px 12px; border-radius: 8px;
+    display: inline-block;
+    white-space: nowrap;
+  }
+  .tb-agent { background: #ffedd5; color: #c2410c; }
+  .tb-subagent { background: #fce7f3; color: #be185d; }
+  .tb-global { background: #dcfce7; color: #15803d; }
+  .tb-scoped { background: #e0e7ff; color: #3730a3; }
+  .tb-personal { background: #fef9c3; color: #854d0e; }
+
+  /* ── Example Cards ── */
+  .example-card {
+    background: #fff;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 14px;
+    padding: 24px 28px;
+    margin-bottom: 16px;
+    transition: border-color 0.2s ease;
+  }
+  .example-card:hover {
+    border-color: #c7d2fe;
+  }
+  .example-card h4 {
+    font-size: 15px; font-weight: 800; color: #111827;
+    margin-bottom: 14px; letter-spacing: -0.2px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .example-card h4 .rec-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; font-weight: 700;
+    padding: 3px 10px; border-radius: 20px;
+  }
+  .example-card .ex-wrong, .example-card .ex-right {
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-size: 13px; line-height: 1.6; font-weight: 500;
+    margin-bottom: 10px;
+  }
+  .ex-wrong {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #991b1b;
+  }
+  .ex-right {
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    color: #166534;
+  }
+  .example-card .ex-why {
+    font-size: 12.5px; color: #4b5563; line-height: 1.65;
+    font-weight: 500;
+    padding-left: 12px;
+    border-left: 2.5px solid #343CED;
+  }
+
+  /* ── Footer ── */
+  .footer {
+    margin-top: 8px;
+    padding-top: 24px;
+    border-top: 2px solid #e2dbd0;
+    font-size: 13.5px; color: #6b7280;
+    text-align: center; font-weight: 600;
+    letter-spacing: -0.2px;
+    line-height: 1.6;
+  }
+  .cta-btn {
+    display: inline-block;
+    background: #343CED;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 12px 32px;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: background 0.2s ease, transform 0.15s ease;
+    box-shadow: 0 2px 8px rgba(52, 60, 237, 0.25);
+  }
+  .cta-btn:hover {
+    background: #2a31d4;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(52, 60, 237, 0.35);
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    .card { padding: 28px 22px 28px; border-radius: 20px; }
+    .header h1 { font-size: 26px; }
+    .compare-row { grid-template-columns: 1fr; }
+    .framework-table { font-size: 11.5px; }
+    .framework-table thead th, .framework-table tbody td { padding: 10px 12px; }
+    .distinction { padding: 20px 22px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ═══════════════════════════ HEADER CARD ═══════════════════════════ -->
+  <div class="card">
+    <div class="header">
+      <a href="https://www.glean.com" target="_blank" rel="noopener" class="logo-box"><img src="logo.png" alt="Glean logo"></a>
+      <h1>Agents <span class="vs">vs.</span> Skills</h1>
+      <p class="subtitle">Key distinctions between Glean's two agentic primitives — and a decision framework for when to use each.</p>
+    </div>
+
+    <!-- Core Premise -->
+    <div class="premise-box">
+      <div class="premise-label">Core Premise</div>
+      <p>As agentic primitives and core AI fundamentals strengthen, <strong>Assistant + Skills</strong> will increasingly act like an agent and digital coworker, handling the majority of end-user use cases with growing autonomy and intelligence.</p>
+      <div class="key-insight">The question is not which product is more agentic. The question is what Glean Agents uniquely provide. Agents are containers that package skills, tools, and knowledge with enterprise-grade governance, scoping, identity, and operational controls for high-value production workflows.</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════ DURABLE DIFFERENTIATORS ═══════════════════════ -->
+  <div class="card">
+    <div class="section-header s-durable">
+      <div class="section-icon">&#9878;</div>
+      <div>
+        <h2>Durable Differentiators</h2>
+        <div class="section-sub">Architectural properties of agents that skills cannot replicate without becoming agents themselves</div>
+      </div>
+    </div>
+
+    <!-- 1. Independent Identity -->
+    <div class="distinction">
+      <div class="distinction-title">
+        <span class="distinction-num">1</span>
+        Independent Identity
+        <span class="durability-tag tag-durable">durable</span>
+      </div>
+
+      <div class="dist-section">
+        <div class="dist-label label-enables">What Agents Enable</div>
+        <ul>
+          <li>Execute with their own <strong>service account identity</strong>, separate from individual users</li>
+          <li>Access to <strong>privileged tools</strong> that end-users should never have</li>
+          <li><strong>Background execution</strong> without requiring a logged-in user</li>
+          <li>Audit trails that <strong>distinguish agent actions</strong> from human actions</li>
+        </ul>
+      </div>
+
+      <div class="dist-section">
+        <div class="dist-label label-matters">Why This Matters</div>
+        <p>Some operations require elevated permissions that users should never possess directly. An IT Admin Agent can reset passwords or provision software because <strong>it has privileged access</strong>, not because the requesting user does. This separates capability from user permissions.</p>
+      </div>
+
+      <div class="dist-section">
+        <div class="dist-label label-example">Example</div>
+        <div class="example-box">
+          <span class="ex-dim">User asks:</span> "Reset my password"<br>
+          <span class="ex-arrow">IT Agent &rarr;</span> Executes with IT service account credentials <span class="ex-dim">(user never has this permission)</span><br>
+          <span class="ex-arrow">Audit log &rarr;</span> Shows <strong>"IT Agent"</strong> performed the action, not the user
+        </div>
+      </div>
+
+      <div class="compare-row">
+        <div class="compare-cell cell-agent">
+          <div class="cell-label">&#129302; Agent</div>
+          Executes with its own service account identity and privileged access
+        </div>
+        <div class="compare-cell cell-skill">
+          <div class="cell-label">&#10024; Skill</div>
+          Always executes in the user's security context, inheriting their permissions only
+        </div>
+      </div>
+
+      <div class="durability-note"><strong>Why this is durable:</strong> Identity separation is a fundamental architectural boundary. A skill that gains its own service account and execution context is, by definition, an agent.</div>
+    </div>
+
+    <!-- 2. Installability -->
+    <div class="distinction">
+      <div class="distinction-title">
+        <span class="distinction-num">2</span>
+        Installability & External Surface Deployment
+        <span class="durability-tag tag-durable">durable</span>
+      </div>
+
+      <div class="dist-section">
+        <div class="dist-label label-enables">What Agents Enable</div>
+        <ul>
+          <li>Deployment to <strong>external surfaces</strong> (Slack channels, ServiceNow, Teams)</li>
+          <li><strong>Embedded experiences</strong> within third-party systems</li>
+          <li><strong>Standalone invocation</strong> outside the Glean Assistant</li>
+        </ul>
+      </div>
+
+      <div class="dist-section">
+        <div class="dist-label label-matters">Why This Matters</div>
+        <p>Agents can be <strong>installed where users already work</strong>. An HR Agent lives in the #hr-help Slack channel. An IT Agent is embedded in the ServiceNow portal. Skills are invoked capabilities within the Assistant &mdash; they don't have an independent presence in external systems.</p>
+      </div>
+
+      <div class="dist-section">
+        <div class="dist-label label-example">Example</div>
+        <div class="example-box">
+          <span class="ex-check">&#10004;</span> IT Agent &mdash; Installed in <strong>#it-help</strong> Slack channel, responds 24/7<br>
+          <span class="ex-cross">&#10008;</span> IT Skill &mdash; Can only be invoked inside Glean Assistant
+        </div>
+      </div>
+
+      <div class="durability-note"><strong>Why this is durable:</strong> Skills are ingredients consumed by assistants and agents. They don't have an addressable identity or presence outside the assistant context.</div>
+    </div>
+
+    <!-- 3. Scoped Execution -->
+    <div class="distinction">
+      <div class="distinction-title">
+        <span class="distinction-num">3</span>
+        Scoped & Constrained Execution Environment
+        <span class="durability-tag tag-durable">durable</span>
+      </div>
+
+      <div class="dist-section">
+        <div class="dist-label label-enables">What Agents Enable</div>
+        <ul>
+          <li><strong>Constrained tool access</strong> &mdash; agents only use tools relevant to their domain</li>
+          <li><strong>Knowledge boundaries</strong> &mdash; IT agents see only IT docs, not finance data</li>
+          <li>Explicit <strong>tool and knowledge manifests</strong> per agent</li>
+          <li><strong>Guaranteed guardrails</strong> &mdash; the agent cannot break out of its scope</li>
+        </ul>
+      </div>
+
+      <div class="dist-section">
+        <div class="dist-label label-matters">Why This Matters</div>
+        <p>General-purpose assistants have broad access, creating security and relevance problems. An IT Helpdesk Agent should <strong>never search through finance documents</strong>. Agents enforce these boundaries by design. Skills operate in the user's context with their full access.</p>
+      </div>
+
+      <div class="compare-row">
+        <div class="compare-cell cell-agent">
+          <div class="cell-label">&#129302; Agent</div>
+          Scoped to IT documentation, ticketing systems, password reset tools, software provisioning
+        </div>
+        <div class="compare-cell cell-skill">
+          <div class="cell-label">&#10024; Skill</div>
+          Could accidentally surface finance data when helping with an IT question, creating compliance risks
+        </div>
+      </div>
+
+      <div class="durability-note"><strong>Why this is durable:</strong> Skills run within the assistant's broad context. An agent runs in a separate, constrained environment. A skill that gains enforced scoping is effectively becoming an agent.</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════ NEAR-TERM DIFFERENTIATORS ═══════════════════════ -->
+  <div class="card">
+    <div class="section-header s-nearterm">
+      <div class="section-icon">&#9201;</div>
+      <div>
+        <h2>Near-Term Differentiators</h2>
+        <div class="section-sub">Agent advantages for the next 6&ndash;12 months &mdash; skills will likely gain parity as the ecosystem matures</div>
+      </div>
+    </div>
+
+    <!-- 4. Observability -->
+    <div class="distinction">
+      <div class="distinction-title">
+        <span class="distinction-num">4</span>
+        Observability, Analytics & Feedback Loops
+        <span class="durability-tag tag-nearterm">near-term</span>
+      </div>
+
+      <div class="dist-section">
+        <div class="dist-label label-enables">What Agents Enable Today</div>
+        <ul>
+          <li><strong>Per-agent execution traces</strong> (steps, tools used, latency, errors)</li>
+          <li><strong>Agent-level dashboards</strong> (success rate, ticket volume, resolution time)</li>
+          <li><strong>ROI metrics</strong> (cost per resolved ticket, time saved per agent)</li>
+          <li><strong>SLA monitoring</strong> and alerting</li>
+          <li><strong>Qualitative feedback routing:</strong> thumbs up/down routed directly to the agent owner</li>
+          <li><strong>Clear attribution:</strong> when something fails, you know exactly which agent failed</li>
+          <li><strong>SME-driven iteration:</strong> agent owners receive feedback and iterate based on domain expertise</li>
+        </ul>
+      </div>
+
+      <div class="dist-section">
+        <div class="dist-label label-example">Example</div>
+        <div class="example-box">
+          <strong>IT Agent Dashboard:</strong> 1,247 password resets &bull; 89% success rate &bull; avg 2.3 min &bull; $12K saved<br><br>
+          <span class="ex-arrow">Feedback loop &rarr;</span> User thumbs down VPN response &rarr; Routes to Sarah (IT Lead) &rarr; She updates prompts &rarr; Success rate: <strong>89% &rarr; 94%</strong>
+        </div>
+      </div>
+
+      <div class="erode-note"><strong>Why this will erode:</strong> As skills gain creators/owners and admin-level distribution, the scaffolding for per-skill observability will be built. The execution boundary argument holds today but weakens as skills become more structured.</div>
+    </div>
+
+    <!-- 5. Cost Optimization -->
+    <div class="distinction">
+      <div class="distinction-title">
+        <span class="distinction-num">5</span>
+        Cost Optimization & Budget Guardrails
+        <span class="durability-tag tag-nearterm">near-term</span>
+      </div>
+
+      <div class="dist-section">
+        <div class="dist-label label-enables">What Agents Enable Today</div>
+        <ul>
+          <li><strong>Per-agent model selection</strong> and budget caps aligned with ROI</li>
+          <li><strong>Real-time cost tracking</strong> per agent</li>
+          <li><strong>Different cost tolerances</strong> based on business value</li>
+        </ul>
+      </div>
+
+      <div class="dist-section">
+        <div class="dist-label label-example">Examples</div>
+        <div class="compare-row">
+          <div class="compare-cell cell-agent" style="border-color: #fbbf24;">
+            <div class="cell-label" style="color: #92400e;">&#128181; Cost Reduction</div>
+            <strong>IT Helpdesk Agent</strong><br>
+            Saves $75K/yr in labor<br>
+            Uses Haiku ($240/yr)<br>
+            <strong>Net savings: $74,760</strong>
+          </div>
+          <div class="compare-cell cell-agent" style="border-color: #a78bfa;">
+            <div class="cell-label" style="color: #5b21b6;">&#128200; Revenue Driver</div>
+            <strong>Sales Agent</strong><br>
+            Generates $3M in new deals<br>
+            Uses Opus ($6K/yr)<br>
+            <strong>ROI justifies premium model</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="erode-note"><strong>Why this will erode:</strong> Per-skill model selection and cost tracking are engineering problems, not architectural ones. As skills gain structure and attribution, cost optimization could extend to them.</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════ CONVERGING CAPABILITIES ═══════════════════════ -->
+  <div class="card">
+    <div class="section-header s-converge">
+      <div class="section-icon">&#9888;</div>
+      <div>
+        <h2>Converging Capabilities</h2>
+        <div class="section-sub">Agent features that skills must adopt now for enterprise readiness &mdash; customers are already asking</div>
+      </div>
+    </div>
+
+    <!-- 6. Governance -->
+    <div class="distinction">
+      <div class="distinction-title">
+        <span class="distinction-num">6</span>
+        Governance & Permission Control
+        <span class="durability-tag tag-needed">skills need now</span>
+      </div>
+
+      <div class="dist-section">
+        <div class="dist-label label-enables">What Agents Have Today</div>
+        <ul>
+          <li><strong>Centralized control</strong> over who can create, distribute, and manage containers</li>
+          <li><strong>Approval workflows</strong> for deployment (compliance, security review, rollback)</li>
+          <li><strong>Deployment gates</strong> (gradual rollout, A/B testing of versions)</li>
+          <li><strong>Access control</strong> for which users/groups can invoke specific agents</li>
+        </ul>
+      </div>
+
+      <div class="dist-section">
+        <div class="dist-label label-matters">Why Skills Need This Now</div>
+        <p>In enterprises, not everyone should create production workflows that touch sensitive systems. Skills currently lack organizational control. Skills that include <strong>code execution (Python via AFS)</strong> are especially high-risk for ungoverned sharing. Customers are already demanding governance for skills.</p>
+      </div>
+
+      <div class="dist-section">
+        <div class="dist-label label-example">Example</div>
+        <p>Your marketing team publishes a "Brand Voice" skill. Today, any user could upload a competing skill with <strong>outdated brand guidelines</strong>. Without governance: no admin control over active skills, no approval flow, no way to ensure everyone uses the latest version.</p>
+      </div>
+
+      <div class="build-note"><strong>What we should build:</strong> Reuse the governance primitives already built for agents (admin roles, sharing controls, approval flows) and extend them to skills rather than building parallel systems.</div>
+    </div>
+
+    <!-- 7. Packaging & Versioning -->
+    <div class="distinction">
+      <div class="distinction-title">
+        <span class="distinction-num">7</span>
+        Packaging, Versioning & Testing
+        <span class="durability-tag tag-needed">skills need now</span>
+      </div>
+
+      <div class="dist-section">
+        <div class="dist-label label-enables">What Agents Have Today</div>
+        <ul>
+          <li><strong>Versioned, deployable artifacts</strong> (Agent v1.2)</li>
+          <li><strong>Independent test suites</strong> and regression testing per agent</li>
+          <li><strong>Rollback capabilities</strong> when new versions fail</li>
+          <li><strong>Staged deployments</strong> (dev &rarr; staging &rarr; production)</li>
+        </ul>
+      </div>
+
+      <div class="dist-section">
+        <div class="dist-label label-example">Example</div>
+        <div class="example-box">
+          <strong>Sales Agent v2.0</strong> changes CRM update logic:<br><br>
+          <span class="ex-check">&#10004;</span> Test v2.0 against regression suite before rollout<br>
+          <span class="ex-check">&#10004;</span> Deploy to 10% of users, monitor for errors<br>
+          <span class="ex-check">&#10004;</span> Rollback to v1.9 if issues arise
+        </div>
+      </div>
+
+      <div class="build-note"><strong>What we should build:</strong> GitHub-based skill management. Sync skills from repos, support PRs as the change control mechanism, and provide version history and rollback within Glean admin. We need this Git-based ADLC support for agents as well.</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════ DECISION FRAMEWORK ═══════════════════════ -->
+  <div class="card">
+    <div class="section-header s-framework">
+      <div class="section-icon">&#9881;</div>
+      <div>
+        <h2>Decision Framework</h2>
+        <div class="section-sub">Agents and skills are complementary &mdash; agents are production workflows that often use skills as their tools</div>
+      </div>
+    </div>
+
+    <table class="framework-table">
+      <thead>
+        <tr>
+          <th style="width: 17%;">Build This</th>
+          <th style="width: 33%;">When</th>
+          <th style="width: 50%;">Characteristics</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="type-badge tb-agent">Agent</span></td>
+          <td>Needs governance, scoping, identity, or operational controls</td>
+          <td>Independent identity, scoped tools/knowledge, governance, versioning, observability, SME ownership, cost optimization</td>
+        </tr>
+        <tr>
+          <td><span class="type-badge tb-subagent">Subagent</span></td>
+          <td>Needs domain reasoning, no independent lifecycle</td>
+          <td>Domain expertise, multi-step decisions, delegated execution within another agent</td>
+        </tr>
+        <tr>
+          <td><span class="type-badge tb-global">Global Skill</span></td>
+          <td>Simple, reusable capability for many users; deployed by admin or builder</td>
+          <td>Single-purpose, stateless, horizontal use case (brand tone, JIRA formatting) where standardization matters org-wide</td>
+        </tr>
+        <tr>
+          <td><span class="type-badge tb-scoped">Agent-Scoped Skill</span></td>
+          <td>Specialized capability for one agent's domain</td>
+          <td>Complex, domain-specific logic needed only by that agent</td>
+        </tr>
+        <tr>
+          <td><span class="type-badge tb-personal">Personal Skill</span></td>
+          <td>Built or imported by a user for personal use only</td>
+          <td>Same as global skill, but idiosyncratic to the end user's preference (feedback giving style)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ═══════════════════════ EXAMPLES ═══════════════════════ -->
+  <div class="card">
+    <div class="section-header s-examples">
+      <div class="section-icon">&#128161;</div>
+      <div>
+        <h2>Framework in Practice</h2>
+        <div class="section-sub">Concrete examples of choosing the right primitive for each use case</div>
+      </div>
+    </div>
+
+    <!-- Example 1 -->
+    <div class="example-card">
+      <h4>When to use an Agent <span class="rec-badge tb-agent">use agent</span></h4>
+      <div class="ex-wrong">&#10008;&ensp;<strong>"Weekly Reporting Skill"</strong> &mdash; just drafts documents when called</div>
+      <div class="ex-right">&#10004;&ensp;<strong>"Weekly Report Agent"</strong> &mdash; runs every Friday, gathers metrics, drafts report, sends to stakeholders</div>
+      <div class="ex-why"><strong>Why Agent:</strong> Needs independent scheduling (triggers), its own service account for data access, ADLC controls, and version control. A simple writing skill can't handle the orchestration, lifecycle, or governance requirements.</div>
+    </div>
+
+    <!-- Example 2 -->
+    <div class="example-card">
+      <h4>When to use a Global Skill <span class="rec-badge tb-global">use global skill</span></h4>
+      <div class="ex-wrong">&#10008;&ensp;<code>send_email()</code> as agent-scoped skill inside Sales Agent</div>
+      <div class="ex-right">&#10004;&ensp;<code>send_email()</code> as global skill &mdash; reusable by Assistant and all agents</div>
+      <div class="ex-why"><strong>Why Global Skill:</strong> Email sending is a horizontal capability everyone needs &mdash; Sales, IT, Marketing, HR. Making it global allows the Assistant and multiple agents to leverage it without rebuilding.</div>
+    </div>
+
+    <!-- Example 3 -->
+    <div class="example-card">
+      <h4>When to use an Agent-Scoped Skill <span class="rec-badge tb-scoped">use scoped skill</span></h4>
+      <div class="ex-wrong">&#10008;&ensp;<code>reset_password_with_approval_and_mfa_check()</code> as global skill</div>
+      <div class="ex-right">&#10004;&ensp;<code>reset_password_with_approval_and_mfa_check()</code> as agent-scoped skill inside IT Agent</div>
+      <div class="ex-why"><strong>Why Agent-Scoped Skill:</strong> This complex, multi-step operation with approval workflows and MFA verification is specific to IT Helpdesk processes. It's too specialized to be a general-purpose Assistant capability.</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════ FOOTER ═══════════════════════ -->
+  <div class="card" style="padding: 32px 52px;">
+    <div class="footer" style="margin-top: 0; padding-top: 0; border-top: none;">
+      Agents and Skills are complementary. Build the right primitive for the right job.
+      <br><br>
+      <a href="https://www.glean.com/product/overview" target="_blank" rel="noopener" class="cta-btn">Explore the Platform</a>
+      <br><br>
+      <span style="font-size: 12px; font-weight: 500; color: #9ca3af;">V1.0 &mdash; Authored by Karan Gupta, AI Outcomes Manager at Glean</span>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
