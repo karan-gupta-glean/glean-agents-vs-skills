@@ -581,7 +581,7 @@
       <div class="section-icon">&#9201;</div>
       <div>
         <h2>Near-Term Differentiators</h2>
-        <div class="section-sub">Agent advantages for the next 6&ndash;12 months &mdash; skills will likely gain parity as the ecosystem matures</div>
+        <div class="section-sub">Capabilities where agents provide distinct operational advantages today</div>
       </div>
     </div>
 
@@ -614,7 +614,7 @@
         </div>
       </div>
 
-      <div class="erode-note"><strong>Why this will erode:</strong> As skills gain creators/owners and admin-level distribution, the scaffolding for per-skill observability will be built. The execution boundary argument holds today but weakens as skills become more structured.</div>
+      <div class="durability-note"><strong>Key takeaway:</strong> Agents provide the execution boundary needed to track both quantitative metrics and qualitative insights. Without this boundary, feedback and attribution become ambiguous across multi-skill conversations.</div>
     </div>
 
     <!-- 5. Cost Optimization -->
@@ -654,7 +654,7 @@
         </div>
       </div>
 
-      <div class="erode-note"><strong>Why this will erode:</strong> Per-skill model selection and cost tracking are engineering problems, not architectural ones. As skills gain structure and attribution, cost optimization could extend to them.</div>
+      <div class="durability-note"><strong>Key takeaway:</strong> Agents allow you to align AI spend with business outcomes &mdash; optimizing cost for high-volume, low-complexity workflows while investing in premium models where revenue impact justifies it.</div>
     </div>
   </div>
 
@@ -663,8 +663,8 @@
     <div class="section-header s-converge">
       <div class="section-icon">&#9888;</div>
       <div>
-        <h2>Converging Capabilities</h2>
-        <div class="section-sub">Agent features that skills must adopt now for enterprise readiness &mdash; customers are already asking</div>
+        <h2>Shared Platform Capabilities</h2>
+        <div class="section-sub">Capabilities being extended from agents to skills to strengthen the full platform</div>
       </div>
     </div>
 
@@ -673,7 +673,7 @@
       <div class="distinction-title">
         <span class="distinction-num">6</span>
         Governance & Permission Control
-        <span class="durability-tag tag-needed">skills need now</span>
+        <span class="durability-tag tag-needed">platform-wide</span>
       </div>
 
       <div class="dist-section">
@@ -687,16 +687,16 @@
       </div>
 
       <div class="dist-section">
-        <div class="dist-label label-matters">Why Skills Need This Now</div>
-        <p>In enterprises, not everyone should create production workflows that touch sensitive systems. Skills currently lack organizational control. Skills that include <strong>code execution (Python via AFS)</strong> are especially high-risk for ungoverned sharing. Customers are already demanding governance for skills.</p>
+        <div class="dist-label label-matters">Why This Matters</div>
+        <p>In enterprises, not everyone should create production workflows that touch sensitive systems. Governance ensures <strong>organizational control over who can create, distribute, and invoke</strong> both agents and skills &mdash; especially for workflows involving code execution or sensitive data access.</p>
       </div>
 
       <div class="dist-section">
         <div class="dist-label label-example">Example</div>
-        <p>Your marketing team publishes a "Brand Voice" skill. Today, any user could upload a competing skill with <strong>outdated brand guidelines</strong>. Without governance: no admin control over active skills, no approval flow, no way to ensure everyone uses the latest version.</p>
+        <p>Your marketing team publishes a "Brand Voice" skill that enforces tone and messaging guidelines. With governance, <strong>admins control which skills are active org-wide</strong>, enforce approval flows before a skill goes live, and ensure everyone uses the latest approved version.</p>
       </div>
 
-      <div class="build-note"><strong>What we should build:</strong> Reuse the governance primitives already built for agents (admin roles, sharing controls, approval flows) and extend them to skills rather than building parallel systems.</div>
+      <div class="durability-note"><strong>Platform approach:</strong> Glean extends the same governance primitives across both agents and skills &mdash; admin roles, sharing controls, and approval flows &mdash; so enterprises get consistent controls across the entire platform.</div>
     </div>
 
     <!-- 7. Packaging & Versioning -->
@@ -704,7 +704,7 @@
       <div class="distinction-title">
         <span class="distinction-num">7</span>
         Packaging, Versioning & Testing
-        <span class="durability-tag tag-needed">skills need now</span>
+        <span class="durability-tag tag-needed">platform-wide</span>
       </div>
 
       <div class="dist-section">
@@ -727,7 +727,7 @@
         </div>
       </div>
 
-      <div class="build-note"><strong>What we should build:</strong> GitHub-based skill management. Sync skills from repos, support PRs as the change control mechanism, and provide version history and rollback within Glean admin. We need this Git-based ADLC support for agents as well.</div>
+      <div class="durability-note"><strong>Platform approach:</strong> Glean supports versioning, testing, and staged deployments for both agents and skills &mdash; enabling the same software development rigor you apply to production code.</div>
     </div>
   </div>
 
@@ -794,7 +794,7 @@
       <h4>When to use an Agent <span class="rec-badge tb-agent">use agent</span></h4>
       <div class="ex-wrong">&#10008;&ensp;<strong>"Weekly Reporting Skill"</strong> &mdash; just drafts documents when called</div>
       <div class="ex-right">&#10004;&ensp;<strong>"Weekly Report Agent"</strong> &mdash; runs every Friday, gathers metrics, drafts report, sends to stakeholders</div>
-      <div class="ex-why"><strong>Why Agent:</strong> Needs independent scheduling (triggers), its own service account for data access, ADLC controls, and version control. A simple writing skill can't handle the orchestration, lifecycle, or governance requirements.</div>
+      <div class="ex-why"><strong>Why Agent:</strong> Needs independent scheduling (triggers), its own service account for data access, lifecycle controls, and version management. A simple writing skill can't handle the orchestration or governance requirements.</div>
     </div>
 
     <!-- Example 2 -->
