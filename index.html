@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<!-- v2.0 - customer-ready -->
+<!-- v3.0 - aligned to RFC -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Agents vs. Skills — Key Distinctions | Glean</title>
+<title>Agents vs. Skills — A Guide for Glean Customers</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 
@@ -72,7 +72,7 @@
     max-width: 780px;
   }
 
-  /* ── Core Premise ── */
+  /* ── Core Premise / At a Glance ── */
   .premise-box {
     background: linear-gradient(135deg, #f0f0ff 0%, #fff 100%);
     border: 2px solid #343CED;
@@ -126,11 +126,14 @@
   }
 
   /* Section color themes */
-  .s-durable .section-icon { background: #ede9fe; }
-  .s-nearterm .section-icon { background: #fef9c3; }
-  .s-converge .section-icon { background: #ffedd5; }
+  .s-agents .section-icon { background: #ede9fe; }
+  .s-skills .section-icon { background: #dcfce7; }
   .s-framework .section-icon { background: #dbeafe; }
-  .s-examples .section-icon { background: #dcfce7; }
+  .s-examples .section-icon { background: #ffedd5; }
+  .s-together .section-icon { background: #fef9c3; }
+  .s-governance .section-icon { background: #fce7f3; }
+  .s-started .section-icon { background: #e0e7ff; }
+  .s-advantages .section-icon { background: #f0fdfa; }
 
   /* ── Distinction cards ── */
   .distinction {
@@ -145,6 +148,7 @@
     border-color: #c7d2fe;
     box-shadow: 0 2px 12px rgba(52, 60, 237, 0.06);
   }
+  .distinction:last-child { margin-bottom: 0; }
   .distinction-num {
     font-family: 'JetBrains Mono', monospace;
     font-size: 12px; font-weight: 700;
@@ -170,8 +174,7 @@
     white-space: nowrap;
   }
   .tag-durable { background: #ede9fe; color: #5b21b6; border: 1.5px solid #c4b5fd; }
-  .tag-nearterm { background: #fef9c3; color: #a16207; border: 1.5px solid #fde047; }
-  .tag-needed { background: #ffedd5; color: #c2410c; border: 1.5px solid #fdba74; }
+  .tag-platform { background: #fce7f3; color: #be185d; border: 1.5px solid #f9a8d4; }
 
   /* Sub-sections within distinction */
   .dist-section {
@@ -187,9 +190,7 @@
   .label-enables { color: #15803d; }
   .label-matters { color: #343CED; }
   .label-example { color: #c2410c; }
-  .label-erode { color: #9ca3af; }
-  .label-durable { color: #5b21b6; }
-  .label-build { color: #0f766e; }
+  .label-skills { color: #0f766e; }
 
   .dist-section ul {
     list-style: none;
@@ -241,22 +242,12 @@
     font-weight: 500;
     margin-top: 12px;
   }
-  .erode-note {
-    background: #fefce8;
-    border-left: 3px solid #fde047;
+  .skill-note {
+    background: #f0fdf4;
+    border-left: 3px solid #86efac;
     border-radius: 0 8px 8px 0;
     padding: 12px 16px;
-    font-size: 12.5px; color: #854d0e;
-    line-height: 1.65;
-    font-weight: 500;
-    margin-top: 12px;
-  }
-  .build-note {
-    background: #f0fdfa;
-    border-left: 3px solid #5eead4;
-    border-radius: 0 8px 8px 0;
-    padding: 12px 16px;
-    font-size: 12.5px; color: #0f766e;
+    font-size: 12.5px; color: #166534;
     line-height: 1.65;
     font-weight: 500;
     margin-top: 12px;
@@ -341,10 +332,41 @@
     white-space: nowrap;
   }
   .tb-agent { background: #ffedd5; color: #c2410c; }
-  .tb-subagent { background: #fce7f3; color: #be185d; }
-  .tb-global { background: #dcfce7; color: #15803d; }
-  .tb-scoped { background: #e0e7ff; color: #3730a3; }
-  .tb-personal { background: #fef9c3; color: #854d0e; }
+  .tb-skill { background: #dcfce7; color: #15803d; }
+
+  /* ── Governance Table ── */
+  .gov-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 13px;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1.5px solid #e5e7eb;
+    margin-top: 12px;
+  }
+  .gov-table thead th {
+    background: #1e1b4b;
+    color: #fff;
+    font-weight: 700;
+    padding: 12px 16px;
+    text-align: left;
+    font-size: 11.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .gov-table tbody td {
+    padding: 11px 16px;
+    border-bottom: 1px solid #f3f4f6;
+    color: #374151;
+    font-weight: 500;
+    line-height: 1.55;
+    vertical-align: top;
+  }
+  .gov-table tbody tr:last-child td { border-bottom: none; }
+  .gov-table tbody tr { transition: background 0.15s ease; }
+  .gov-table tbody tr:hover { background: rgba(52, 60, 237, 0.03); }
+  .gov-table .gov-cap { font-weight: 700; color: #111827; }
 
   /* ── Example Cards ── */
   .example-card {
@@ -355,6 +377,7 @@
     margin-bottom: 16px;
     transition: border-color 0.2s ease;
   }
+  .example-card:last-child { margin-bottom: 0; }
   .example-card:hover {
     border-color: #c7d2fe;
   }
@@ -363,26 +386,21 @@
     margin-bottom: 14px; letter-spacing: -0.2px;
     display: flex; align-items: center; gap: 10px;
   }
-  .example-card h4 .rec-badge {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px; font-weight: 700;
-    padding: 3px 10px; border-radius: 20px;
-  }
-  .example-card .ex-wrong, .example-card .ex-right {
+  .example-card .ex-option {
     border-radius: 8px;
     padding: 10px 16px;
     font-size: 13px; line-height: 1.6; font-weight: 500;
     margin-bottom: 10px;
   }
-  .ex-wrong {
-    background: #fef2f2;
-    border: 1px solid #fecaca;
-    color: #991b1b;
-  }
-  .ex-right {
+  .ex-as-skill {
     background: #f0fdf4;
     border: 1px solid #bbf7d0;
     color: #166534;
+  }
+  .ex-as-agent {
+    background: #fff7ed;
+    border: 1px solid #fed7aa;
+    color: #9a3412;
   }
   .example-card .ex-why {
     font-size: 12.5px; color: #4b5563; line-height: 1.65;
@@ -390,6 +408,71 @@
     padding-left: 12px;
     border-left: 2.5px solid #343CED;
   }
+
+  /* ── Skills scope cards ── */
+  .scope-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-top: 12px;
+  }
+  .scope-card {
+    background: #fff;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 20px 22px;
+    transition: border-color 0.2s ease;
+  }
+  .scope-card:hover { border-color: #c7d2fe; }
+  .scope-card h5 {
+    font-size: 14px; font-weight: 800; color: #111827;
+    margin-bottom: 6px; letter-spacing: -0.2px;
+  }
+  .scope-card p {
+    font-size: 13px; color: #4b5563; line-height: 1.6; font-weight: 500;
+  }
+
+  /* ── Getting Started Steps ── */
+  .steps-list {
+    list-style: none; padding: 0;
+  }
+  .steps-list li {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 0;
+    border-bottom: 1px solid #f3f4f6;
+    font-size: 14px; color: #374151; line-height: 1.65; font-weight: 500;
+  }
+  .steps-list li:last-child { border-bottom: none; }
+  .step-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; font-weight: 700;
+    color: #fff; background: #343CED;
+    width: 28px; height: 28px; min-width: 28px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    margin-top: 1px;
+  }
+
+  /* ── Together Section ── */
+  .together-list {
+    list-style: none; padding: 0;
+  }
+  .together-list li {
+    font-size: 13.5px; color: #374151; line-height: 1.7;
+    padding: 6px 0 6px 24px;
+    position: relative;
+    font-weight: 500;
+  }
+  .together-list li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 14px;
+    width: 10px; height: 10px;
+    border-radius: 3px;
+    background: #343CED;
+    opacity: 0.2;
+  }
+  .together-list li strong { color: #111827; }
 
   /* ── Footer ── */
   .footer {
@@ -419,56 +502,17 @@
     box-shadow: 0 4px 14px rgba(52, 60, 237, 0.35);
   }
 
-  /* ── Persona Filter ── */
-  .persona-bar {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    margin-top: 24px;
-  }
-  .persona-bar .persona-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px; font-weight: 700; color: #6b7280;
-    text-transform: uppercase; letter-spacing: 1.2px;
-    margin-right: 6px;
-  }
-  .persona-btn {
-    font-family: 'Inter', sans-serif;
-    font-size: 13px; font-weight: 600;
-    padding: 8px 20px;
-    border-radius: 10px;
-    border: 1.5px solid #d1d5db;
-    background: #fff;
-    color: #4b5563;
-    cursor: pointer;
-    transition: all 0.2s ease;
-  }
-  .persona-btn:hover {
-    border-color: #a5b4fc;
-    color: #343CED;
-  }
-  .persona-btn.active {
-    background: #343CED;
-    color: #fff;
-    border-color: #343CED;
-    box-shadow: 0 2px 8px rgba(52, 60, 237, 0.25);
-  }
-
-  /* Persona content toggling */
-  [data-persona="business"] { display: none !important; }
-  body.persona-business [data-persona="business"] { display: revert !important; }
-  body.persona-business [data-persona="technical"] { display: none !important; }
-
   /* ── Responsive ── */
   @media (max-width: 768px) {
+    body { padding: 24px 12px; }
     .card { padding: 28px 22px 28px; border-radius: 20px; }
     .header h1 { font-size: 26px; }
     .compare-row { grid-template-columns: 1fr; }
-    .framework-table { font-size: 11.5px; }
-    .framework-table thead th, .framework-table tbody td { padding: 10px 12px; }
+    .scope-grid { grid-template-columns: 1fr; }
+    .framework-table, .gov-table { font-size: 11.5px; }
+    .framework-table thead th, .framework-table tbody td,
+    .gov-table thead th, .gov-table tbody td { padding: 10px 12px; }
     .distinction { padding: 20px 22px; }
-    .persona-bar { flex-wrap: wrap; }
   }
 </style>
 </head>
@@ -480,40 +524,30 @@
     <div class="header">
       <a href="https://www.glean.com" target="_blank" rel="noopener" class="logo-box"><img src="logo.png" alt="Glean logo"></a>
       <h1>Agents <span class="vs">vs.</span> Skills</h1>
-      <p class="subtitle" data-persona="technical">Key distinctions between Glean's two agentic primitives — and a decision framework for when to use each.</p>
-      <p class="subtitle" data-persona="business">A simple guide to understanding when to use Agents vs. Skills in Glean — no technical background needed.</p>
-      <div class="persona-bar">
-        <span class="persona-label">View as</span>
-        <button class="persona-btn active" data-target="technical" onclick="setPersona('technical')">How It Works</button>
-        <button class="persona-btn" data-target="business" onclick="setPersona('business')">What It Means</button>
-      </div>
+      <p class="subtitle">A Guide for Glean Customers &mdash; understanding when to use each and how they work together</p>
     </div>
 
-    <!-- Core Premise -->
-    <div class="premise-box" data-persona="technical">
-      <div class="premise-label">Core Premise</div>
-      <p><strong>Skills</strong> are reusable instruction sets that extend what the Glean Assistant can do. <strong>Agents</strong> package skills, tools, and knowledge together with enterprise-grade governance, scoping, identity, and operational controls &mdash; purpose-built for high-value production workflows.</p>
-      <div class="key-insight">Both are powerful on their own. Together, they let you automate anything from a simple formatting task to a fully governed, cross-system workflow &mdash; all grounded in your company's knowledge.</div>
-    </div>
-    <div class="premise-box" data-persona="business">
-      <div class="premise-label">The Simple Version</div>
-      <p>Think of <strong>Skills</strong> as quick recipes &mdash; they teach Glean's Assistant how to do a specific task (like writing in your brand voice or formatting a report). <strong>Agents</strong> are like dedicated team members &mdash; they have their own access, work independently, and can handle entire workflows end-to-end.</p>
-      <div class="key-insight">Skills make the Assistant smarter. Agents handle whole jobs on their own. Together, they automate everything from simple tasks to complex business processes.</div>
+    <!-- Overview -->
+    <div class="premise-box">
+      <div class="premise-label">At a Glance</div>
+      <p><strong>Skills</strong> are reusable instructions that the Glean Assistant and Agents can invoke to perform specific tasks.</p>
+      <p style="margin-top: 10px;"><strong>Agents</strong> are purpose-built digital workers that package skills, tools, and knowledge with enterprise-grade governance, scoping, and operational controls for high-value production workflows.</p>
+      <div class="key-insight">Both are powerful on their own. Together, they let you automate anything from a simple formatting task to a fully governed, cross-system workflow.</div>
     </div>
   </div>
 
-  <!-- ═══════════════════════ DURABLE DIFFERENTIATORS ═══════════════════════ -->
+  <!-- ═══════════════════════ WHAT MAKES AGENTS UNIQUE ═══════════════════════ -->
   <div class="card">
-    <div class="section-header s-durable">
-      <div class="section-icon">&#9878;</div>
+    <div class="section-header s-agents">
+      <div class="section-icon">&#129302;</div>
       <div>
-        <h2>What Makes Agents Different</h2>
-        <div class="section-sub">Core architectural capabilities that distinguish agents from skills</div>
+        <h2>What Makes Agents Unique</h2>
+        <div class="section-sub">Capabilities that distinguish Agents from Skills &mdash; dedicated identity, external deployment, and constrained execution</div>
       </div>
     </div>
 
     <!-- 1. Independent Identity -->
-    <div class="distinction" data-persona="technical">
+    <div class="distinction">
       <div class="distinction-title">
         <span class="distinction-num">1</span>
         Independent Identity
@@ -524,22 +558,18 @@
         <div class="dist-label label-enables">What Agents Enable</div>
         <ul>
           <li>Execute with their own <strong>service account identity</strong>, separate from individual users</li>
-          <li>Access to <strong>privileged tools</strong> that end-users should never have</li>
-          <li><strong>Background execution</strong> without requiring a logged-in user</li>
-          <li>Audit trails that <strong>distinguish agent actions</strong> from human actions</li>
+          <li>Access <strong>privileged tools and systems</strong> that no end-user should have direct access to</li>
+          <li>Run in the <strong>background</strong> without requiring a logged-in user</li>
+          <li>Produce audit trails that clearly <strong>distinguish Agent actions from human actions</strong></li>
         </ul>
-      </div>
-
-      <div class="dist-section">
-        <div class="dist-label label-matters">Why This Matters</div>
-        <p>Some operations require elevated permissions that users should never possess directly. An IT Admin Agent can reset passwords or provision software because <strong>it has privileged access</strong>, not because the requesting user does. This separates capability from user permissions.</p>
       </div>
 
       <div class="dist-section">
         <div class="dist-label label-example">Example</div>
         <div class="example-box">
-          <span class="ex-dim">User asks:</span> "Reset my password"<br>
-          <span class="ex-arrow">IT Agent &rarr;</span> Executes with IT service account credentials <span class="ex-dim">(user never has this permission)</span><br>
+          <span class="ex-dim">Employee asks:</span> "Reset my password"<br>
+          <span class="ex-arrow">IT Agent &rarr;</span> Executes using IT service account credentials<br>
+          <span class="ex-dim">&mdash; the employee never has direct access to the password reset system</span><br>
           <span class="ex-arrow">Audit log &rarr;</span> Shows <strong>"IT Agent"</strong> performed the action, not the user
         </div>
       </div>
@@ -551,310 +581,157 @@
         </div>
         <div class="compare-cell cell-skill">
           <div class="cell-label">&#10024; Skill</div>
-          Always executes in the user's security context, inheriting their permissions only
+          Executes in the user's own security context &mdash; the right model for user-initiated tasks where standard permissions apply
         </div>
       </div>
-
-      <div class="durability-note"><strong>Bottom line:</strong> When a workflow needs its own identity and elevated permissions, that's an agent.</div>
     </div>
 
-    <div class="distinction" data-persona="business">
-      <div class="distinction-title">
-        <span class="distinction-num">1</span>
-        Agents Have Their Own Access
-        <span class="durability-tag tag-durable">agent-only</span>
-      </div>
-
-      <div class="dist-section">
-        <div class="dist-label label-enables">What This Means</div>
-        <ul>
-          <li>Agents can <strong>do things on behalf of your team</strong> that individual employees can't (or shouldn't) do themselves</li>
-          <li>They work <strong>in the background</strong> &mdash; no one needs to be logged in</li>
-          <li>Every action is <strong>tracked separately</strong> so you always know what the agent did vs. what a person did</li>
-        </ul>
-      </div>
-
-      <div class="dist-section">
-        <div class="dist-label label-matters">Why This Matters</div>
-        <p>Think of an IT Help Desk Agent: an employee asks to reset their password, and the agent handles it securely &mdash; <strong>without giving the employee direct access</strong> to the password system. It's like having a trusted specialist on your team who handles sensitive tasks so your people don't have to.</p>
-      </div>
-
-      <div class="dist-section">
-        <div class="dist-label label-example">Real-World Analogy</div>
-        <div class="example-box">
-          <span class="ex-arrow">Skill =</span> A recipe card that helps <strong>you</strong> cook the meal<br>
-          <span class="ex-arrow">Agent =</span> A personal chef who <strong>cooks for you</strong> using their own kitchen access
-        </div>
-      </div>
-
-      <div class="durability-note"><strong>Bottom line:</strong> When you need something done that requires special access or should run without someone watching, that's an agent.</div>
-    </div>
-
-    <!-- 2. Installability -->
-    <div class="distinction" data-persona="technical">
+    <!-- 2. Deployment to External Surfaces -->
+    <div class="distinction">
       <div class="distinction-title">
         <span class="distinction-num">2</span>
-        Installability & External Surface Deployment
+        Deployment to External Surfaces
         <span class="durability-tag tag-durable">agent-only</span>
       </div>
 
       <div class="dist-section">
         <div class="dist-label label-enables">What Agents Enable</div>
         <ul>
-          <li>Deployment to <strong>external surfaces</strong> (Slack channels, ServiceNow, Teams)</li>
-          <li><strong>Embedded experiences</strong> within third-party systems</li>
-          <li><strong>Standalone invocation</strong> outside the Glean Assistant</li>
+          <li>Install where your teams already work &mdash; <strong>Slack channels, ServiceNow, Microsoft Teams</strong></li>
+          <li>Respond <strong>24/7</strong> in dedicated channels without requiring users to open a separate app</li>
+          <li><strong>Standalone presence</strong> in third-party systems</li>
         </ul>
-      </div>
-
-      <div class="dist-section">
-        <div class="dist-label label-matters">Why This Matters</div>
-        <p>Agents can be <strong>installed where users already work</strong>. An HR Agent lives in the #hr-help Slack channel. An IT Agent is embedded in the ServiceNow portal. Skills are invoked capabilities within the Assistant &mdash; they don't have an independent presence in external systems.</p>
       </div>
 
       <div class="dist-section">
         <div class="dist-label label-example">Example</div>
         <div class="example-box">
-          <span class="ex-check">&#10004;</span> IT Agent &mdash; Installed in <strong>#it-help</strong> Slack channel, responds 24/7<br>
-          <span class="ex-cross">&#10008;</span> IT Skill &mdash; Can only be invoked inside Glean Assistant
+          <span class="ex-check">&#10004;</span> Your <strong>IT Agent</strong> lives in the <strong>#it-help</strong> Slack channel, responding to employee questions 24/7<br>
+          <span class="ex-check">&#10004;</span> Your <strong>HR Agent</strong> is embedded in the ServiceNow portal<br>
+          <span class="ex-check">&#10004;</span> Your <strong>Sales Agent</strong> is surfaced in Microsoft Teams
         </div>
       </div>
 
-      <div class="durability-note"><strong>Bottom line:</strong> When you need AI to meet users where they already work &mdash; in Slack, Teams, or ServiceNow &mdash; that's an agent.</div>
-    </div>
-
-    <div class="distinction" data-persona="business">
-      <div class="distinction-title">
-        <span class="distinction-num">2</span>
-        Agents Live Where Your Team Works
-        <span class="durability-tag tag-durable">agent-only</span>
-      </div>
-
-      <div class="dist-section">
-        <div class="dist-label label-enables">What This Means</div>
-        <ul>
-          <li>Agents can be <strong>added to Slack channels, Teams, or ServiceNow</strong> &mdash; wherever your people already are</li>
-          <li>Employees don't need to open a separate app &mdash; <strong>help comes to them</strong></li>
-          <li>Available <strong>24/7</strong>, even outside business hours</li>
-        </ul>
-      </div>
-
-      <div class="dist-section">
-        <div class="dist-label label-matters">Why This Matters</div>
-        <p>Your team shouldn't have to change how they work to get AI help. An HR Agent can sit right in your <strong>#hr-help Slack channel</strong>, answering benefits questions instantly. A skill, on the other hand, only works when someone opens the Glean Assistant directly.</p>
-      </div>
-
-      <div class="dist-section">
-        <div class="dist-label label-example">Real-World Analogy</div>
-        <div class="example-box">
-          <span class="ex-arrow">Skill =</span> A reference book in the library &mdash; helpful, but <strong>you have to go find it</strong><br>
-          <span class="ex-arrow">Agent =</span> A colleague sitting in your team's Slack channel, <strong>ready to help instantly</strong>
+      <div class="compare-row">
+        <div class="compare-cell cell-agent">
+          <div class="cell-label">&#129302; Agent</div>
+          Extends Glean's reach into the platforms your teams already use daily
+        </div>
+        <div class="compare-cell cell-skill">
+          <div class="cell-label">&#10024; Skill</div>
+          Accessed through the Glean Assistant &mdash; the natural home for user-driven tasks and queries
         </div>
       </div>
-
-      <div class="durability-note"><strong>Bottom line:</strong> When you want AI to be available right where your team already works &mdash; in Slack, Teams, or your help desk &mdash; that's an agent.</div>
     </div>
 
-    <!-- 3. Scoped Execution -->
-    <div class="distinction" data-persona="technical">
+    <!-- 3. Scoped and Constrained Execution -->
+    <div class="distinction">
       <div class="distinction-title">
         <span class="distinction-num">3</span>
-        Scoped & Constrained Execution Environment
+        Scoped &amp; Constrained Execution
         <span class="durability-tag tag-durable">agent-only</span>
       </div>
 
       <div class="dist-section">
         <div class="dist-label label-enables">What Agents Enable</div>
         <ul>
-          <li><strong>Constrained tool access</strong> &mdash; agents only use tools relevant to their domain</li>
-          <li><strong>Knowledge boundaries</strong> &mdash; IT agents see only IT docs, not finance data</li>
-          <li>Explicit <strong>tool and knowledge manifests</strong> per agent</li>
-          <li><strong>Guaranteed guardrails</strong> &mdash; the agent cannot break out of its scope</li>
+          <li>Run in a <strong>constrained environment</strong> with explicit boundaries on tools and knowledge sources</li>
+          <li>An IT Helpdesk Agent is <strong>scoped to IT documentation and ticketing systems only</strong></li>
+          <li>Responses stay within domain <strong>at the architecture level</strong></li>
         </ul>
-      </div>
-
-      <div class="dist-section">
-        <div class="dist-label label-matters">Why This Matters</div>
-        <p>General-purpose assistants have broad access, creating security and relevance problems. An IT Helpdesk Agent should <strong>never search through finance documents</strong>. Agents enforce these boundaries by design. Skills operate in the user's context with their full access.</p>
       </div>
 
       <div class="compare-row">
         <div class="compare-cell cell-agent">
           <div class="cell-label">&#129302; Agent</div>
-          Scoped to IT documentation, ticketing systems, password reset tools, software provisioning
+          Constrains access at the <strong>system level</strong> &mdash; the agent architecturally cannot access out-of-scope data or tools
         </div>
         <div class="compare-cell cell-skill">
           <div class="cell-label">&#10024; Skill</div>
-          Could accidentally surface finance data when helping with an IT question, creating compliance risks
+          Achieves scoping through <strong>model instruction following</strong> &mdash; the skill's prompt directs which knowledge and tools to use. Can also include code execution (Python via Agent Sandbox). Works well for the vast majority of use cases.
         </div>
       </div>
 
-      <div class="durability-note"><strong>Bottom line:</strong> When a workflow must be locked down to specific data and tools with guaranteed guardrails, that's an agent.</div>
-    </div>
-
-    <div class="distinction" data-persona="business">
-      <div class="distinction-title">
-        <span class="distinction-num">3</span>
-        Agents Only See What They Should
-        <span class="durability-tag tag-durable">agent-only</span>
-      </div>
-
-      <div class="dist-section">
-        <div class="dist-label label-enables">What This Means</div>
-        <ul>
-          <li>Each agent is <strong>restricted to only the information and tools it needs</strong> for its job</li>
-          <li>An IT agent <strong>can't accidentally access</strong> finance, HR, or legal data</li>
-          <li>Built-in <strong>guardrails</strong> keep the agent focused and safe</li>
-        </ul>
-      </div>
-
-      <div class="dist-section">
-        <div class="dist-label label-matters">Why This Matters</div>
-        <p>You wouldn't give an IT help desk employee access to your company's financial records. The same logic applies to AI. Agents are <strong>purpose-built with clear boundaries</strong> &mdash; an IT Agent only sees IT documentation and tools. This keeps sensitive information safe and answers more relevant.</p>
-      </div>
-
-      <div class="compare-row">
-        <div class="compare-cell cell-agent">
-          <div class="cell-label">&#129302; Agent</div>
-          Like a specialist &mdash; only has access to what's relevant to their role
-        </div>
-        <div class="compare-cell cell-skill">
-          <div class="cell-label">&#10024; Skill</div>
-          Like a generalist assistant &mdash; can see everything you can see, which may be too broad
-        </div>
-      </div>
-
-      <div class="durability-note"><strong>Bottom line:</strong> When you need to ensure AI only accesses specific information and stays in its lane, that's an agent.</div>
+      <div class="durability-note"><strong>When to choose Agents over Skills for scoping:</strong> When workflows demand higher degrees of reliability &mdash; such as compliance-sensitive domains or regulated processes &mdash; Agents provide an additional layer of enforcement by constraining access at the system level rather than the prompt level.</div>
     </div>
   </div>
 
-  <!-- ═══════════════════════ SHARED PLATFORM CAPABILITIES ═══════════════════════ -->
+  <!-- ═══════════════════════ ADDITIONAL AGENT ADVANTAGES ═══════════════════════ -->
   <div class="card">
-    <div class="section-header s-converge">
-      <div class="section-icon">&#9888;</div>
+    <div class="section-header s-advantages">
+      <div class="section-icon">&#128200;</div>
       <div>
-        <h2>Enterprise-Grade Controls</h2>
-        <div class="section-sub">Governance and lifecycle management across agents and skills</div>
+        <h2>Additional Agent Advantages</h2>
+        <div class="section-sub">Observability, analytics, and cost optimization capabilities unique to Agents</div>
       </div>
     </div>
 
-    <!-- 6. Governance -->
-    <div class="distinction" data-persona="technical">
+    <div class="distinction">
       <div class="distinction-title">
-        <span class="distinction-num">4</span>
-        Governance & Permission Control
-        <span class="durability-tag tag-needed">platform-wide</span>
+        Observability &amp; Analytics
       </div>
-
       <div class="dist-section">
-        <div class="dist-label label-enables">What This Enables</div>
+        <div class="dist-label label-enables">What Agents Provide</div>
         <ul>
-          <li><strong>Centralized control</strong> over who can create, distribute, and manage agents and skills</li>
-          <li><strong>Approval workflows</strong> for deployment (compliance review, security sign-off, rollback)</li>
-          <li><strong>Scoped access control</strong> for which users and groups can invoke specific agents or skills</li>
+          <li><strong>Dedicated dashboards</strong> with execution-level visibility</li>
+          <li>Per-agent metrics: <strong>success rate, resolution time, ticket volume</strong></li>
+          <li><strong>ROI tracking</strong> &mdash; cost per resolved ticket, time saved</li>
+          <li>Qualitative feedback routed directly to the <strong>Agent owner</strong> for continuous improvement</li>
+          <li>Clear attribution &mdash; when something fails, you know <strong>exactly which Agent failed</strong> and who owns it</li>
         </ul>
       </div>
-
-      <div class="dist-section">
-        <div class="dist-label label-matters">Why This Matters</div>
-        <p>In enterprises, not everyone should create production workflows that touch sensitive systems. Governance ensures <strong>organizational control over who can create, distribute, and invoke</strong> both agents and skills &mdash; especially for workflows involving code execution or sensitive data access.</p>
-      </div>
-
-      <div class="dist-section">
-        <div class="dist-label label-example">Example</div>
-        <p>Your marketing team publishes a "Brand Voice" skill that enforces tone and messaging guidelines. With governance, <strong>admins control which skills are active org-wide</strong>, enforce approval flows before a skill goes live, and ensure everyone uses the latest approved version.</p>
-      </div>
-
-      <div class="durability-note"><strong>Platform approach:</strong> Glean extends the same governance primitives across both agents and skills &mdash; admin roles, sharing controls, and approval flows &mdash; so enterprises get consistent controls across the entire platform.</div>
     </div>
 
-    <div class="distinction" data-persona="business">
+    <div class="distinction">
       <div class="distinction-title">
-        <span class="distinction-num">4</span>
-        Admins Stay in Control
-        <span class="durability-tag tag-needed">platform-wide</span>
+        Cost Optimization
       </div>
-
       <div class="dist-section">
-        <div class="dist-label label-enables">What This Means</div>
+        <div class="dist-label label-enables">What Agents Enable</div>
         <ul>
-          <li>Your IT or admin team decides <strong>who can create, share, and use</strong> agents and skills</li>
-          <li>New agents and skills go through an <strong>approval process</strong> before going live</li>
-          <li>You control <strong>which teams</strong> have access to which capabilities</li>
+          <li>Different Agents can use <strong>different AI models</strong> aligned to their ROI profile</li>
+          <li><strong>Cost-reduction Agents</strong> (e.g., IT Helpdesk): Use efficient models to maximize net savings</li>
+          <li><strong>Revenue-driving Agents</strong> (e.g., Sales): Use premium models where the business value justifies the cost</li>
         </ul>
       </div>
+    </div>
+  </div>
 
-      <div class="dist-section">
-        <div class="dist-label label-matters">Why This Matters</div>
-        <p>Just like you wouldn't let anyone install software on company computers without IT approval, you want <strong>oversight over AI automations</strong>. Governance means the right people review and approve agents and skills before they go live &mdash; keeping your organization safe and compliant.</p>
+  <!-- ═══════════════════════ UNDERSTANDING SKILLS ═══════════════════════ -->
+  <div class="card">
+    <div class="section-header s-skills">
+      <div class="section-icon">&#10024;</div>
+      <div>
+        <h2>Understanding Skills</h2>
+        <div class="section-sub">The building blocks of AI automation in Glean &mdash; reusable, single-purpose capabilities</div>
       </div>
-
-      <div class="dist-section">
-        <div class="dist-label label-example">Example</div>
-        <p>Your marketing team creates a "Brand Voice" skill so everyone writes in a consistent tone. <strong>An admin reviews and approves it</strong>, then publishes it to the whole company &mdash; ensuring everyone uses the same, approved version.</p>
-      </div>
-
-      <div class="durability-note"><strong>Platform approach:</strong> Glean gives admins the same controls over both agents and skills &mdash; approval workflows, sharing settings, and access rules &mdash; all in one place.</div>
     </div>
 
-    <!-- 7. Packaging & Versioning -->
-    <div class="distinction" data-persona="technical">
-      <div class="distinction-title">
-        <span class="distinction-num">5</span>
-        Packaging, Versioning & Testing
-        <span class="durability-tag tag-needed">platform-wide</span>
-      </div>
-
-      <div class="dist-section">
-        <div class="dist-label label-enables">What This Enables</div>
-        <ul>
-          <li><strong>Versioned, deployable artifacts</strong> (Agent v1.2)</li>
-          <li><strong>Independent test suites</strong> and regression testing per agent</li>
-          <li><strong>Rollback capabilities</strong> when new versions fail</li>
-          <li><strong>Staged deployments</strong> (dev &rarr; staging &rarr; production)</li>
-        </ul>
-      </div>
-
-      <div class="dist-section">
-        <div class="dist-label label-example">Example</div>
-        <div class="example-box">
-          <strong>Sales Agent v2.0</strong> changes CRM update logic:<br><br>
-          <span class="ex-check">&#10004;</span> Test v2.0 against regression suite before rollout<br>
-          <span class="ex-check">&#10004;</span> Deploy to 10% of users, monitor for errors<br>
-          <span class="ex-check">&#10004;</span> Rollback to v1.9 if issues arise
-        </div>
-      </div>
-
-      <div class="durability-note"><strong>Platform approach:</strong> Glean supports versioning, testing, and staged deployments for both agents and skills &mdash; enabling the same software development rigor you apply to production code.</div>
+    <div class="dist-section" style="margin-bottom: 20px;">
+      <p>Skills are reusable, single-purpose capabilities that can be invoked by the Glean Assistant or by Agents. <strong>Any user can create a skill.</strong> What differentiates skills is how broadly they're shared and where they're used.</p>
     </div>
 
-    <div class="distinction" data-persona="business">
-      <div class="distinction-title">
-        <span class="distinction-num">5</span>
-        Safe Updates & Easy Rollback
-        <span class="durability-tag tag-needed">platform-wide</span>
+    <div class="scope-grid">
+      <div class="scope-card">
+        <h5>&#128100; Personal Use</h5>
+        <p>A skill you create lives in your own library by default. You can use it in the Assistant and share it with specific colleagues.</p>
       </div>
-
-      <div class="dist-section">
-        <div class="dist-label label-enables">What This Means</div>
-        <ul>
-          <li>Agents and skills are <strong>versioned</strong> &mdash; you always know which version is live</li>
-          <li>Updates can be <strong>tested with a small group first</strong> before rolling out to everyone</li>
-          <li>If something goes wrong, you can <strong>instantly revert</strong> to the previous version</li>
-        </ul>
+      <div class="scope-card">
+        <h5>&#128101; Team or Department-Wide</h5>
+        <p>Departmental Skill Admins can share skills across their departments, standardizing workflows for entire teams.</p>
       </div>
-
-      <div class="dist-section">
-        <div class="dist-label label-example">Example</div>
-        <div class="example-box">
-          Your <strong>Sales Agent</strong> gets an update to how it logs deals:<br><br>
-          <span class="ex-check">&#10004;</span> Test the update with a small pilot group first<br>
-          <span class="ex-check">&#10004;</span> Roll it out to the full sales team once validated<br>
-          <span class="ex-check">&#10004;</span> Roll back instantly if anything looks off
-        </div>
+      <div class="scope-card">
+        <h5>&#127758; Org-Wide</h5>
+        <p>Org-wide Skill Admins can deploy skills to the entire organization, ensuring every user has access to approved, standardized capabilities (e.g., a Brand Voice skill or a MEDDPICC qualification skill).</p>
       </div>
+      <div class="scope-card">
+        <h5>&#128274; Agent-Scoped</h5>
+        <p>Skills can be built specifically for use within an Agent's domain, providing specialized capabilities that only that Agent invokes (e.g., a password reset workflow with MFA verification used only by the IT Agent).</p>
+      </div>
+    </div>
 
-      <div class="durability-note"><strong>Platform approach:</strong> Glean lets you test, roll out gradually, and roll back both agents and skills &mdash; so updates are safe, not scary.</div>
+    <div class="skill-note" style="margin-top: 20px;">
+      <strong>Key principle:</strong> Skills are ingredients. Agents and the Assistant consume them. A well-designed skill library means every Agent and every user benefits from shared, tested capabilities.
     </div>
   </div>
 
@@ -864,162 +741,204 @@
       <div class="section-icon">&#9881;</div>
       <div>
         <h2>Decision Framework</h2>
-        <div class="section-sub">Agents and skills are complementary &mdash; agents are production workflows that often use skills as their tools</div>
+        <div class="section-sub">When to build an Agent vs. a Skill</div>
       </div>
     </div>
 
-    <table class="framework-table" data-persona="technical">
+    <table class="framework-table">
       <thead>
         <tr>
-          <th style="width: 17%;">Build This</th>
-          <th style="width: 33%;">When</th>
-          <th style="width: 50%;">Characteristics</th>
+          <th style="width: 15%;">Build This</th>
+          <th style="width: 35%;">When You Need</th>
+          <th style="width: 50%;">Key Characteristics</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td><span class="type-badge tb-agent">Agent</span></td>
-          <td>Needs governance, scoping, identity, or operational controls</td>
-          <td>Independent identity, scoped tools/knowledge, governance, versioning, observability, SME ownership, cost optimization</td>
+          <td>Governance, scoped access, independent identity, or deployment to external surfaces</td>
+          <td>Own service account, constrained tools/knowledge, versioning, observability, dedicated ownership</td>
         </tr>
         <tr>
-          <td><span class="type-badge tb-subagent">Subagent</span></td>
-          <td>Needs domain reasoning, no independent lifecycle</td>
-          <td>Domain expertise, multi-step decisions, delegated execution within another agent</td>
-        </tr>
-        <tr>
-          <td><span class="type-badge tb-global">Global Skill</span></td>
-          <td>Simple, reusable capability for many users; deployed by admin or builder</td>
-          <td>Single-purpose, stateless, horizontal use case (brand tone, JIRA formatting) where standardization matters org-wide</td>
-        </tr>
-        <tr>
-          <td><span class="type-badge tb-scoped">Agent-Scoped Skill</span></td>
-          <td>Specialized capability for one agent's domain</td>
-          <td>Complex, domain-specific logic needed only by that agent</td>
-        </tr>
-        <tr>
-          <td><span class="type-badge tb-personal">Personal Skill</span></td>
-          <td>Built or imported by a user for personal use only</td>
-          <td>Same as global skill, but idiosyncratic to the end user's preference (feedback giving style)</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <table class="framework-table" data-persona="business">
-      <thead>
-        <tr>
-          <th style="width: 17%;">Use This</th>
-          <th style="width: 33%;">When You Need To...</th>
-          <th style="width: 50%;">Think of It Like...</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><span class="type-badge tb-agent">Agent</span></td>
-          <td>Automate an entire workflow that runs independently with its own access</td>
-          <td>A dedicated team member who handles a specific job &mdash; like an IT help desk agent or a sales ops coordinator</td>
-        </tr>
-        <tr>
-          <td><span class="type-badge tb-subagent">Subagent</span></td>
-          <td>Have an agent call on a specialist for a specific part of its job</td>
-          <td>A specialist that your main agent consults &mdash; like an agent asking a compliance expert to review a step</td>
-        </tr>
-        <tr>
-          <td><span class="type-badge tb-global">Global Skill</span></td>
-          <td>Give everyone a simple, reusable capability</td>
-          <td>A company-wide template &mdash; like a "write in brand voice" or "format a Jira ticket" tool everyone can use</td>
-        </tr>
-        <tr>
-          <td><span class="type-badge tb-scoped">Agent-Scoped Skill</span></td>
-          <td>Give one specific agent a specialized capability</td>
-          <td>A specialized tool only one agent needs &mdash; like a password reset process that only the IT Agent uses</td>
-        </tr>
-        <tr>
-          <td><span class="type-badge tb-personal">Personal Skill</span></td>
-          <td>Create something just for yourself</td>
-          <td>Your personal shortcut &mdash; like a custom way you prefer to give feedback or summarize meetings</td>
+          <td><span class="type-badge tb-skill">Skill</span></td>
+          <td>A reusable capability for the Assistant or Agents to invoke</td>
+          <td>Single-purpose, shareable at any scope (personal, team, org-wide), can be agent-scoped or broadly available</td>
         </tr>
       </tbody>
     </table>
   </div>
 
-  <!-- ═══════════════════════ EXAMPLES ═══════════════════════ -->
+  <!-- ═══════════════════════ PRACTICAL EXAMPLES ═══════════════════════ -->
   <div class="card">
     <div class="section-header s-examples">
       <div class="section-icon">&#128161;</div>
       <div>
-        <h2>Framework in Practice</h2>
-        <div class="section-sub">Concrete examples of choosing the right primitive for each use case</div>
+        <h2>Practical Examples</h2>
+        <div class="section-sub">Concrete scenarios showing when to choose an Agent vs. a Skill</div>
       </div>
     </div>
 
-    <!-- Example 1 -->
-    <div class="example-card" data-persona="technical">
-      <h4>When to use an Agent <span class="rec-badge tb-agent">use agent</span></h4>
-      <div class="ex-wrong">&#10008;&ensp;<strong>"Weekly Reporting Skill"</strong> &mdash; just drafts documents when called</div>
-      <div class="ex-right">&#10004;&ensp;<strong>"Weekly Report Agent"</strong> &mdash; runs every Friday, gathers metrics, drafts report, sends to stakeholders</div>
-      <div class="ex-why"><strong>Why Agent:</strong> Needs independent scheduling (triggers), its own service account for data access, lifecycle controls, and version management. A simple writing skill can't handle the orchestration or governance requirements.</div>
+    <!-- Example 1: Weekly Reporting -->
+    <div class="example-card">
+      <h4>Example 1: Weekly Reporting</h4>
+      <div class="ex-option ex-as-skill">&#10024;&ensp;<strong>As a Skill:</strong> A "Weekly Report" skill drafts a document when a user asks for one &mdash; great for on-demand reporting.</div>
+      <div class="ex-option ex-as-agent">&#129302;&ensp;<strong>As an Agent:</strong> A Weekly Report Agent runs every Friday on a schedule, automatically gathers metrics, drafts the report, and distributes it to stakeholders.</div>
+      <div class="ex-why"><strong>When to choose Agent:</strong> When the workflow requires independent scheduling, its own service account for data access, and lifecycle controls.</div>
     </div>
 
-    <!-- Example 2 -->
-    <div class="example-card" data-persona="technical">
-      <h4>When to use a Global Skill <span class="rec-badge tb-global">use global skill</span></h4>
-      <div class="ex-wrong">&#10008;&ensp;<code>send_email()</code> as agent-scoped skill inside Sales Agent</div>
-      <div class="ex-right">&#10004;&ensp;<code>send_email()</code> as global skill &mdash; reusable by Assistant and all agents</div>
-      <div class="ex-why"><strong>Why Global Skill:</strong> Email sending is a horizontal capability everyone needs &mdash; Sales, IT, Marketing, HR. Making it global allows the Assistant and multiple agents to leverage it without rebuilding.</div>
+    <!-- Example 2: Email Sending -->
+    <div class="example-card">
+      <h4>Example 2: Email Sending</h4>
+      <div class="ex-option ex-as-agent">&#128274;&ensp;<strong>As an Agent-Scoped Skill:</strong> Building <code>send_email()</code> inside the Sales Agent only.</div>
+      <div class="ex-option ex-as-skill">&#127758;&ensp;<strong>As a Shared Skill:</strong> Making <code>send_email()</code> an org-wide skill so the Assistant, Sales Agent, IT Agent, and Marketing Agent can all use it.</div>
+      <div class="ex-why"><strong>When to share broadly:</strong> When a capability is horizontal &mdash; needed by many users and Agents across the organization.</div>
     </div>
 
-    <!-- Example 3 -->
-    <div class="example-card" data-persona="technical">
-      <h4>When to use an Agent-Scoped Skill <span class="rec-badge tb-scoped">use scoped skill</span></h4>
-      <div class="ex-wrong">&#10008;&ensp;<code>reset_password_with_approval_and_mfa_check()</code> as global skill</div>
-      <div class="ex-right">&#10004;&ensp;<code>reset_password_with_approval_and_mfa_check()</code> as agent-scoped skill inside IT Agent</div>
-      <div class="ex-why"><strong>Why Agent-Scoped Skill:</strong> This complex, multi-step operation with approval workflows and MFA verification is specific to IT Helpdesk processes. It's too specialized to be a general-purpose Assistant capability.</div>
+    <!-- Example 3: Password Reset -->
+    <div class="example-card">
+      <h4>Example 3: Password Reset</h4>
+      <div class="ex-option ex-as-skill">&#127758;&ensp;<strong>As a Broadly Shared Skill:</strong> Making the password reset workflow available as an org-wide capability.</div>
+      <div class="ex-option ex-as-agent">&#128274;&ensp;<strong>As an Agent-Scoped Skill:</strong> Building it as a specialized skill scoped to the IT Agent, which has the privileged access and governance controls to handle it.</div>
+      <div class="ex-why"><strong>When to choose Agent-Scoped:</strong> When the operation involves approval workflows, MFA verification, or other domain-specific logic that belongs within a governed Agent context.</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════ HOW THEY WORK TOGETHER ═══════════════════════ -->
+  <div class="card">
+    <div class="section-header s-together">
+      <div class="section-icon">&#129309;</div>
+      <div>
+        <h2>How Agents and Skills Work Together</h2>
+        <div class="section-sub">Think of Skills as the tools in a toolbox, and Agents as the specialists who use those tools for specific jobs</div>
+      </div>
     </div>
 
-    <!-- Business Examples -->
-    <div class="example-card" data-persona="business">
-      <h4>When to use an Agent <span class="rec-badge tb-agent">use agent</span></h4>
-      <div class="ex-wrong">&#10008;&ensp;<strong>"Weekly Reporting Skill"</strong> &mdash; only helps you write when you ask</div>
-      <div class="ex-right">&#10004;&ensp;<strong>"Weekly Report Agent"</strong> &mdash; automatically gathers data every Friday, creates the report, and sends it to your team</div>
-      <div class="ex-why"><strong>Why Agent:</strong> This job needs to run on its own schedule, pull data from multiple systems, and deliver results without anyone babysitting it. A skill can help you write &mdash; but an agent does the whole job.</div>
+    <ul class="together-list">
+      <li><strong>Org-wide skills</strong> provide shared, standardized capabilities across the company: sending emails, searching knowledge bases, formatting JIRA tickets, enforcing brand guidelines.</li>
+      <li><strong>Agents</strong> are deployed for specific domains: IT Helpdesk, HR Support, Sales Enablement. Each Agent uses a combination of shared skills and its own Agent-scoped skills.</li>
+      <li><strong>The Glean Assistant</strong> serves as the general-purpose interface, using available skills to help users with everyday tasks that don't require a specialized Agent.</li>
+      <li><strong>Personal and shared skills</strong> let individuals and teams customize their workflows &mdash; tailoring the Assistant to their specific work style, processes, and preferences.</li>
+    </ul>
+  </div>
+
+  <!-- ═══════════════════════ ENTERPRISE GOVERNANCE ═══════════════════════ -->
+  <div class="card">
+    <div class="section-header s-governance">
+      <div class="section-icon">&#128737;</div>
+      <div>
+        <h2>Enterprise Governance &amp; Controls</h2>
+        <div class="section-sub">Consistent, unified governance model for both Agents and Skills</div>
+      </div>
     </div>
 
-    <div class="example-card" data-persona="business">
-      <h4>When to use a Global Skill <span class="rec-badge tb-global">use global skill</span></h4>
-      <div class="ex-wrong">&#10008;&ensp;<strong>"Send Email"</strong> built only for the Sales team</div>
-      <div class="ex-right">&#10004;&ensp;<strong>"Send Email"</strong> available to everyone &mdash; Sales, IT, Marketing, HR</div>
-      <div class="ex-why"><strong>Why Global Skill:</strong> Sending emails is something every team needs. Make it once, share it company-wide, and every team (and every agent) can use it &mdash; no need to rebuild the same thing over and over.</div>
+    <div class="dist-section" style="margin-bottom: 20px;">
+      <p>Glean provides enterprise-grade governance for both Agents and Skills using the same patterns for admin roles, tiered sharing, and per-item permissions.</p>
     </div>
 
-    <div class="example-card" data-persona="business">
-      <h4>When to use an Agent-Scoped Skill <span class="rec-badge tb-scoped">use scoped skill</span></h4>
-      <div class="ex-wrong">&#10008;&ensp;<strong>"Password Reset with Approval"</strong> available to everyone</div>
-      <div class="ex-right">&#10004;&ensp;<strong>"Password Reset with Approval"</strong> only available to the IT Help Desk Agent</div>
-      <div class="ex-why"><strong>Why Agent-Scoped Skill:</strong> Password resets involve security checks and approval steps that are specific to the IT team. This capability should only be used by the IT Agent &mdash; it doesn't make sense as a general tool for everyone.</div>
+    <table class="gov-table">
+      <thead>
+        <tr>
+          <th style="width: 28%;">Governance Capability</th>
+          <th style="width: 36%;">Agents</th>
+          <th style="width: 36%;">Skills</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="gov-cap">Admin roles</td>
+          <td>Agent Moderator, Departmental Agent Moderator</td>
+          <td>Org-wide Skill Admin, Departmental Skill Admin</td>
+        </tr>
+        <tr>
+          <td class="gov-cap">Who can create</td>
+          <td>Controlled via "Can create agents" toggle</td>
+          <td>All users can create skills for themselves</td>
+        </tr>
+        <tr>
+          <td class="gov-cap">Share with specific users/groups</td>
+          <td>Gated by "Can share and publish" toggle</td>
+          <td>Available to everyone</td>
+        </tr>
+        <tr>
+          <td class="gov-cap">Share with departments</td>
+          <td>Departmental Agent Moderator</td>
+          <td>Departmental Skill Admin</td>
+        </tr>
+        <tr>
+          <td class="gov-cap">Share org-wide</td>
+          <td>Agent Moderator</td>
+          <td>Org-wide Skill Admin</td>
+        </tr>
+        <tr>
+          <td class="gov-cap">Per-item permissions</td>
+          <td>Viewer, Editor, Owner</td>
+          <td>Viewer, Editor, Owner</td>
+        </tr>
+        <tr>
+          <td class="gov-cap">Admin override</td>
+          <td>Admins have Owner-level access to all agents</td>
+          <td>Admins have Owner-level access to skills they create and control who shares skills org-wide or to departments</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="distinction" style="margin-top: 20px;">
+      <div class="distinction-title">How It Works in Practice</div>
+      <div class="dist-section">
+        <div class="dist-label label-enables">Admin Roles</div>
+        <p>Both use a tiered admin model. For Agents, the <strong>Agent Moderator</strong> can create, edit, delete, view, or share anyone's agent across the organization, while the <strong>Departmental Agent Moderator</strong> has the same capabilities scoped to their departments. Skills follow the same pattern with <strong>Org-wide Skill Admin</strong> and <strong>Departmental Skill Admin</strong> roles.</p>
+      </div>
+      <div class="dist-section">
+        <div class="dist-label label-matters">Sharing Scope</div>
+        <p>Both Agents and Skills tie sharing scope to admin roles, so organizations can <strong>democratize creation while controlling distribution</strong>. Any user can share with specific colleagues, but sharing to departments or the entire organization requires the appropriate admin role.</p>
+      </div>
+      <div class="dist-section">
+        <p><strong>Super Admins and Admins</strong> receive full governance capabilities by default for both Agents and Skills, consistent across the platform.</p>
+      </div>
     </div>
+  </div>
+
+  <!-- ═══════════════════════ GETTING STARTED ═══════════════════════ -->
+  <div class="card">
+    <div class="section-header s-started">
+      <div class="section-icon">&#128640;</div>
+      <div>
+        <h2>Getting Started</h2>
+        <div class="section-sub">A practical path to deploying Agents and Skills in your organization</div>
+      </div>
+    </div>
+
+    <ol class="steps-list">
+      <li>
+        <span class="step-num">1</span>
+        <span><strong>Identify high-value workflows</strong> that would benefit from dedicated Agents &mdash; IT helpdesk, HR support, and sales enablement are common starting points.</span>
+      </li>
+      <li>
+        <span class="step-num">2</span>
+        <span><strong>Audit existing capabilities</strong> to determine which can be built as reusable shared skills versus Agent-scoped capabilities.</span>
+      </li>
+      <li>
+        <span class="step-num">3</span>
+        <span><strong>Start with a pilot Agent</strong> in a well-defined domain with clear success metrics (e.g., IT ticket resolution rate, average response time).</span>
+      </li>
+      <li>
+        <span class="step-num">4</span>
+        <span><strong>Expand your skill library</strong> as you deploy more Agents, ensuring reusable skills are built once and shared across the organization.</span>
+      </li>
+    </ol>
   </div>
 
   <!-- ═══════════════════════ FOOTER ═══════════════════════ -->
   <div class="card" style="padding: 32px 52px;">
     <div class="footer" style="margin-top: 0; padding-top: 0; border-top: none;">
-      Agents and Skills are complementary. Build the right primitive for the right job.
+      Questions? Contact your Glean account team or visit docs.glean.com for detailed implementation guides.
       <br><br>
       <a href="https://www.glean.com/product/overview" target="_blank" rel="noopener" class="cta-btn">Explore the Platform</a>
       <br><br>
-      <span style="font-size: 12px; font-weight: 500; color: #9ca3af;">V2.0 &mdash; Authored by Karan Gupta, AI Outcomes Manager at Glean</span>
+      <span style="font-size: 12px; font-weight: 500; color: #9ca3af;">V3.0 &mdash; Authored by Karan Gupta, AI Outcomes Manager at Glean</span>
     </div>
   </div>
 
 </div>
-
-<script>
-function setPersona(persona) {
-  document.body.classList.toggle('persona-business', persona === 'business');
-  document.querySelectorAll('.persona-btn').forEach(btn => {
-    btn.classList.toggle('active', btn.dataset.target === persona);
-  });
-}
-</script>
 </body>
 </html>
